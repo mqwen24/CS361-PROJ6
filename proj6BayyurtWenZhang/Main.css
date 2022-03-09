@@ -1,0 +1,28 @@
+/*
+ * File: proj5BayyurtEnglishTymkiw.Controller.java
+ * Names: Izge Bayyurt, Nick English, Dylan Tymkiw
+ * Class: CS361
+ * Project 5
+ * Date: 3/07/2022
+ */
+
+.compileButton  {
+    -fx-background-color: paleturquoise;
+    -fx-border-radius: .25em;
+    -fx-background-radius: .25em;
+    -fx-border-color: #000000;
+}
+
+.compileAndRunButton  {
+    -fx-background-color: palegreen;
+    -fx-border-radius: .25em;
+    -fx-background-radius: .25em;
+    -fx-border-color: #000000;
+}
+
+.stopButton {
+    -fx-background-color: palevioletred;
+    -fx-border-radius: .25em;
+    -fx-background-radius: .25em;
+    -fx-border-color: #000000;
+}
