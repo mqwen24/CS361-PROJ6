@@ -6,7 +6,7 @@
 * Date: 3/07/2022
 */
 
-package proj5BayyurtEnglishTymkiw;
+package proj6BayyurtWenZhang;
 
 import javafx.application.Platform;
 import org.fxmisc.richtext.StyleClassedTextArea;
