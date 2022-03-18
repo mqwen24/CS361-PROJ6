@@ -1,14 +1,13 @@
 /*
- * File: proj5BayyurtEnglishTymkiw.Controller.java
- * Names: Izge Bayyurt, Nick English, Dylan Tymkiw
+ * File: proj6BayyurtWenZhang.Controller.java
+ * Names: Izge Bayyurt, Muqing Wen, Chloe Zhang
  * Class: CS361
- * Project 5
- * Date: 3/07/2022
+ * Project 6
+ * Date: 3/17/2022
  */
 
 package proj6BayyurtWenZhang;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
@@ -19,7 +18,6 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Optional;
-import java.util.concurrent.ArrayBlockingQueue;
 
 
 /**

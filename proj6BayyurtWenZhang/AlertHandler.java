@@ -1,10 +1,11 @@
 /*
- * File: proj5BayyurtEnglishTymkiw.AlertHandler.java
- * Names: Izge Bayyurt, Nick English, Dylan Tymkiw
+ * File: proj6BayyurtWenZhang.AlertHandler.java
+ * Names: Izge Bayyurt, Muqing Wen, Chloe Zhang
  * Class: CS361
- * Project 5
- * Date: 3/07/2022
+ * Project 6
+ * Date: 3/17/2022
  */
+
 package proj6BayyurtWenZhang;
 
 import javafx.scene.control.ButtonBar;
@@ -15,6 +16,11 @@ public class AlertHandler {
 
     public AlertHandler(){}
 
+    /*
+        Creates a dialog box with custom message and title to display alerts
+        @param message: the alert text to show
+        @param title: the title of the alert box
+     */
     public void showAlert(String message, String title) {
         Dialog<String> dialog = new Dialog<>();
         dialog.setTitle(title);

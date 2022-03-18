@@ -1,11 +1,10 @@
 /*
-* File: proj5BayyurtEnglishTymkiw.Run.java
-* Names: Izge Bayyurt, Nick English, Dylan Tymkiw
-* Class: CS361
-* Project 5
-* Date: 3/07/2022
-*/
-
+ * File: proj6BayyurtWenZhang.Run.java
+ * Names: Izge Bayyurt, Muqing Wen, Chloe Zhang
+ * Class: CS361
+ * Project 6
+ * Date: 3/17/2022
+ */
 package proj6BayyurtWenZhang;
 
 import javafx.application.Platform;
@@ -36,6 +35,8 @@ public class Run extends Thread{
             pb.command("java", "-cp", this.fileToCompile.getCanonicalPath()
                     .replace("/"+ this.fileToCompile.getName(), ""),
                     this.fileToCompile.getName().replace(".java", ""));
+
+            pb.redirectErrorStream(true);
             Process p = pb.start();
             Controller.outputStream = p.getOutputStream();
 

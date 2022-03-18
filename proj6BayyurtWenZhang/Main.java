@@ -1,9 +1,9 @@
 /*
- * File: proj5BayyurtEnglishTymkiw.Main.java
- * Names: Izge Bayyurt, Nick English, Dylan Tymkiw
+ * File: proj6BayyurtWenZhang.Main.java
+ * Names: Izge Bayyurt, Muqing Wen, Chloe Zhang
  * Class: CS361
- * Project 5
- * Date: 3/07/2022
+ * Project 6
+ * Date: 3/17/2022
  */
 
 package proj6BayyurtWenZhang;
@@ -33,7 +33,7 @@ public class Main extends Application {
             Scene scene = new Scene(fxmlLoader.load(), 1000, 1000);
             scene.getStylesheets().add(JavaKeywordsAsync.class.getResource(
                     "java-keywords.css").toExternalForm());
-            stage.setTitle("Project 5 Izge, Nick, Dylan");
+            stage.setTitle("Project 6 Izge, Wen, Chloe");
             stage.setScene(scene);
             stage.show();
             stage.setOnCloseRequest(E -> {
