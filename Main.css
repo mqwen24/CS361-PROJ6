@@ -1,0 +1,28 @@
+/*
+ * File: proj6BayyurtWenZhang.Main.css
+ * Names: Izge Bayyurt, Muqing Wen, Chloe Zhang
+ * Class: CS361
+ * Project 6
+ * Date: 3/17/2022
+ */
+
+.compileButton  {
+    -fx-background-color: paleturquoise;
+    -fx-border-radius: .25em;
+    -fx-background-radius: .25em;
+    -fx-border-color: #000000;
+}
+
+.compileAndRunButton  {
+    -fx-background-color: palegreen;
+    -fx-border-radius: .25em;
+    -fx-background-radius: .25em;
+    -fx-border-color: #000000;
+}
+
+.stopButton {
+    -fx-background-color: palevioletred;
+    -fx-border-radius: .25em;
+    -fx-background-radius: .25em;
+    -fx-border-color: #000000;
+}
