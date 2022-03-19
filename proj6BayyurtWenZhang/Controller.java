@@ -328,12 +328,7 @@ public class Controller {
 
     /** Takes the string given to the console and writes it to the output stream */
     private void handleInput(KeyEvent key) {
-        if (key.getCode() != KeyCode.ENTER){
-            if(key.getText() != null && key.getText() != ""){
-                outputString += key.getText();
-            }
-        }
-        else {
+        if (key.getCode() == KeyCode.ENTER){
             try {
                 outputStream.write(outputString.getBytes(StandardCharsets.UTF_8));
                 outputStream.write(10); // 10 is the bytecode for new line
@@ -341,6 +336,16 @@ public class Controller {
                 outputString = "";
             } catch (IOException ex) {
                 this.alertHandler.showAlert("IO Exception occured", "Error!");
+            }
+        }
+        else if (key.getCode() == KeyCode.BACK_SPACE) {
+            if (key.getText() != null && key.getText() != "") {
+                outputString = outputString.substring(0, outputString.length()-1);
+            }
+        }
+        else {
+            if (key.getText() != null && key.getText() != "") {
+                outputString += key.getText();
             }
         }
     }
@@ -479,13 +484,7 @@ public class Controller {
         });
         currentThread.start();
 
-        while(currentThread.isAlive()){
-            try {
-                currentThread.join();
-            } catch (InterruptedException e) {
-                alertHandler.showAlert("Run interrupted", "Interrupted");
-            }
-        }
+
 
 
         if (message[0].length()>0)
