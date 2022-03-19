@@ -31,7 +31,7 @@ public class Main extends Application {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Main.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 1000, 1000);
-            scene.getStylesheets().add(JavaKeywordsAsync.class.getResource(
+            scene.getStylesheets().add(CodeAreaHighlighter.class.getResource(
                     "java-keywords.css").toExternalForm());
             stage.setTitle("Project 6 Izge, Wen, Chloe");
             stage.setScene(scene);

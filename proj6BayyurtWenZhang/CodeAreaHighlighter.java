@@ -26,7 +26,7 @@ import org.reactfx.Subscription;
 /**
  * Runs keyword highlighting for a CodeArea.
  */
-public class JavaKeywordsAsync {
+public class CodeAreaHighlighter {
 
     private static final String[] KEYWORDS = new String[] {
             "abstract", "assert", "boolean", "break", "byte",
@@ -65,7 +65,7 @@ public class JavaKeywordsAsync {
      *
      * @param codeArea the CodeArea to highlight in.
      */
-    public JavaKeywordsAsync(CodeArea codeArea){
+    public CodeAreaHighlighter(CodeArea codeArea){
             this.codeArea = codeArea;
             start();
     }

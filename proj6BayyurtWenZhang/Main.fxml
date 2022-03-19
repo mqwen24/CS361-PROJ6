@@ -67,6 +67,8 @@
                       text="Paste" onAction="#handlePaste" accelerator="Shortcut+P"/>
             <MenuItem mnemonicParsing="false"
                       text="Select all" onAction="#handleSelectAll" accelerator="Shortcut+A"/>
+            <MenuItem mnemonicParsing="false"
+                      text="Comment/Uncomment" onAction="#handleComment" accelerator="Shortcut+/"/>
         </Menu>
     </MenuBar>
 

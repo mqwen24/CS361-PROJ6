@@ -10,12 +10,17 @@ package proj6BayyurtWenZhang;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.input.*;
+import org.fxmisc.richtext.CodeArea;
+import org.fxmisc.richtext.Selection;
 import org.fxmisc.richtext.StyleClassedTextArea;
+import org.fxmisc.richtext.model.Paragraph;
+import org.fxmisc.richtext.model.TwoDimensional;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Optional;
 
@@ -265,6 +270,62 @@ public class Controller {
         if(currentThread != null){
             System.out.println("in stop");
             currentThread.interrupt();
+        }
+    }
+
+    @FXML
+    /** Handles commenting and uncommenting
+     *  This method is implemented as such that the selected lines will be individually
+     *  commented or uncommented, meaning that if some lines are commented and some are
+     *  uncommented, it will toggle each individual line- not comment the whole block.
+     */
+    private void handleComment(){
+        CodeArea codeArea = tabHelper.getCurrentCodeArea();
+        IndexRange selectionRange = tabHelper.getCurrentCodeArea().getSelection();
+        if (selectionRange.getLength() > 0){
+            Selection<?, ?, ?> selection = codeArea.getCaretSelectionBind();
+            int startVisibleParIdx = codeArea.allParToVisibleParIndex(selection.getStartParagraphIndex()).get();
+            int endVisibleParIdx = Math.min(startVisibleParIdx + selection.getParagraphSpan(),
+                                            codeArea.getVisibleParagraphs().size());
+
+            // if we selected multiple blocks of paragraphs
+            if (endVisibleParIdx - startVisibleParIdx > 1) {
+                for (int i = startVisibleParIdx; i < endVisibleParIdx; i++) {
+                    System.out.println(i);
+                    String line = codeArea.getText(i);
+                    if (line.trim().startsWith("//")) {
+                        String uncommentedLine = line.replaceFirst("//", "");
+                        codeArea.replaceText(i, 0, i, line.length(), uncommentedLine);
+                    } else {
+                        codeArea.replaceText(i, 0, i, line.length(), "//" + line);
+                    }
+                }
+            } else { // if we selected only one line
+                String line = codeArea.getText(startVisibleParIdx);
+                codeArea.replaceText(startVisibleParIdx, 0,
+                                        startVisibleParIdx, line.length(), "//" + line);
+            }
+
+        } else {
+
+            // Get the cursor position to figure out the paragraph
+            int offset = tabHelper.getCurrentCodeArea().getCaretPosition();
+            TwoDimensional.Position pos = tabHelper.getCurrentCodeArea().
+                                          offsetToPosition(offset, TwoDimensional.Bias.Forward);
+            Paragraph paragraph = tabHelper.getCurrentCodeArea().getParagraph(pos.getMajor());
+
+            // Once we have the paragraph, extract the text and see if we can comment/uncomment
+            String text = paragraph.getText();
+            StringBuilder commentedText = new StringBuilder();
+            String trimmedLine = text.trim();
+            if (trimmedLine.startsWith("//")) {
+                commentedText.append(text.replaceFirst("//", ""));
+            } else {
+                commentedText.append("//").append(text);
+            }
+
+            tabHelper.getCurrentCodeArea().replace(pos.getMajor(),0, pos.getMajor(), paragraph.length(),
+                                                        commentedText.toString(),new ArrayList<String>());
         }
     }
 

@@ -69,7 +69,7 @@ public class TabHelper {
         AnchorPane ap = new AnchorPane();
         ap.getChildren().add(newPane);
         tab.setContent(ap);
-        JavaKeywordsAsync keywordColors= new JavaKeywordsAsync(this.getCurrentCodeArea());
+        CodeAreaHighlighter keywordColors= new CodeAreaHighlighter(this.getCurrentCodeArea());
         this.getCurrentCodeArea().replaceText("class");
         configureDirtyTracking(tab);
 
