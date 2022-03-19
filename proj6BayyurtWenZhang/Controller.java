@@ -281,7 +281,8 @@ public class Controller {
         IndexRange selectionRange = tabHelper.getCurrentCodeArea().getSelection();
         if (selectionRange.getLength() > 0){
             Selection<?, ?, ?> selection = codeArea.getCaretSelectionBind();
-            int startVisibleParIdx = codeArea.allParToVisibleParIndex(selection.getStartParagraphIndex()).get();
+            int startVisibleParIdx = codeArea.
+                    allParToVisibleParIndex(selection.getStartParagraphIndex()).get();
             int endVisibleParIdx = Math.min(startVisibleParIdx + selection.getParagraphSpan(),
                                             codeArea.getVisibleParagraphs().size());
 
@@ -320,8 +321,8 @@ public class Controller {
                 commentedText.append("//").append(text);
             }
 
-            tabHelper.getCurrentCodeArea().replace(pos.getMajor(),0, pos.getMajor(), paragraph.length(),
-                                                        commentedText.toString(),new ArrayList<String>());
+            tabHelper.getCurrentCodeArea().replace(pos.getMajor(),0, pos.getMajor(),
+                         paragraph.length(), commentedText.toString(),new ArrayList<String>());
         }
     }
 
@@ -457,7 +458,8 @@ public class Controller {
                     try {
                         outputStream.close();
                     } catch (IOException e) {
-                        alertHandler.showAlert("Error while closing outputStream", "Error");
+                        alertHandler.showAlert("Error while closing outputStream",
+                                                  "Error");
                     }
                     break;
                 }else {
