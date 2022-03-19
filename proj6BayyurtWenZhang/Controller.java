@@ -20,7 +20,6 @@ import org.fxmisc.richtext.model.TwoDimensional;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Optional;
 
@@ -90,7 +89,6 @@ public class Controller {
         console.setOnKeyPressed(event -> {
             handleInput(event);
         });
-
     }
 
     /**
@@ -121,8 +119,7 @@ public class Controller {
         if(!tabFileMap.containsKey(currentTab)){
             handleSaveAs();
         }else{
-            boolean saved = fileController.saveCurrentFile(tabFileMap.get(currentTab),
-                                                           null);
+            boolean saved = fileController.saveCurrentFile(tabFileMap.get(currentTab));
             if(saved){textHasChangedMap.put(currentTab, false);}
         }
     }
@@ -266,9 +263,7 @@ public class Controller {
     @FXML
     /** Handles stop button */
     private void stop(){
-        System.out.println("stop");
         if(currentThread != null){
-            System.out.println("in stop");
             currentThread.interrupt();
         }
     }
@@ -291,7 +286,6 @@ public class Controller {
             // if we selected multiple blocks of paragraphs
             if (endVisibleParIdx - startVisibleParIdx > 1) {
                 for (int i = startVisibleParIdx; i < endVisibleParIdx; i++) {
-                    System.out.println(i);
                     String line = codeArea.getText(i);
                     if (line.trim().startsWith("//")) {
                         String uncommentedLine = line.replaceFirst("//", "");
@@ -331,7 +325,6 @@ public class Controller {
 
     /** Takes the string given to the console and writes it to the output stream */
     private void handleInput(KeyEvent key) {
-        System.out.println(key);
         if (key.getCode() != KeyCode.ENTER){
             if(key.getText() != null && key.getText() != ""){
                 outputString += key.getText();
@@ -339,13 +332,12 @@ public class Controller {
         }
         else {
             try {
-                System.out.println("hello");
                 outputStream.write(outputString.getBytes(StandardCharsets.UTF_8));
                 outputStream.write(10); // 10 is the bytecode for new line
                 outputStream.flush();
                 outputString = "";
             } catch (IOException ex) {
-                System.out.println("System Error");
+                this.alertHandler.showAlert("IO Exception occured", "Error!");
             }
         }
     }
@@ -359,8 +351,7 @@ public class Controller {
         if (currentFile == null) {
             // if saving process is cancelled, do not continue with compiling
             if (!handleSaveAs())
-                System.out.println("");
-                //return false;
+                return false;
             else
                 currentFile = tabFileMap.get(tabHelper.getCurrentTab());
         }
@@ -471,7 +462,7 @@ public class Controller {
                     try {
                         run.join(1);
                     } catch (InterruptedException e) {
-                        System.out.println("run interrupted");
+                        alertHandler.showAlert("Run interrupted", "Interrupted");
                         break;
                     }
                 }
@@ -483,6 +474,15 @@ public class Controller {
             stop.setDisable(true);
         });
         currentThread.start();
+
+        while(currentThread.isAlive()){
+            try {
+                currentThread.join();
+            } catch (InterruptedException e) {
+                alertHandler.showAlert("Run interrupted", "Interrupted");
+            }
+        }
+
 
         if (message[0].length()>0)
             console.append(message[0], "");

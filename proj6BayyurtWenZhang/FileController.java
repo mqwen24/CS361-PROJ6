@@ -48,11 +48,11 @@ public class FileController {
 
     /**
      * Writes the content of a Tab to a given file path.
+     *  @param currentFile the File currently referenced by the Tab.
      *
-     * @param currentFile the File currently referenced by the Tab.
-     * @param outFile the file to write the CodeArea contents to.
      */
-    public boolean saveCurrentFile(File currentFile, PrintWriter outFile){
+    public boolean saveCurrentFile(File currentFile){
+        PrintWriter outFile;
         try {
             outFile = new PrintWriter(String.valueOf(currentFile));
         } catch (FileNotFoundException e) {

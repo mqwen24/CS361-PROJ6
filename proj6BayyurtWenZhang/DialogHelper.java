@@ -62,7 +62,7 @@ public class DialogHelper {
         File currentFile = chooser.showSaveDialog(null);
         if (currentFile != null) {
             this.filenameFileMap.put(tabHelper.getCurrentTab(), currentFile);
-            boolean saved = fileHelper.saveCurrentFile(currentFile, null);
+            boolean saved = fileHelper.saveCurrentFile(currentFile);
             if(saved){
                 this.textHasChangedMap.put(tabHelper.getCurrentTab(), false);
                 tabHelper.getCurrentTab().setTooltip(new Tooltip(currentFile.toString()));
