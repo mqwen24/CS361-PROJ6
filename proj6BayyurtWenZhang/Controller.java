@@ -8,6 +8,7 @@
 
 package proj6BayyurtWenZhang;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
@@ -66,7 +67,6 @@ public class Controller {
 
     /** Thread to run compile and run in */
     private Thread currentThread;
-
 
     /** Objects to control output and input of the console */
     public static OutputStream outputStream;
@@ -398,8 +398,11 @@ public class Controller {
                     try {
                         comp.join(1);
                     } catch (InterruptedException e) {
-                        this.alertHandler.showAlert("Compilation interrupted, exiting.",
-                                "Process interruption!");
+                        Platform.runLater(() -> {
+                            comp.interrupt();
+                            this.alertHandler.showAlert("Compilation interrupted, exiting.",
+                                    "Process interruption!");
+                        });
                         break;
                     }
                 }
@@ -463,15 +466,21 @@ public class Controller {
                     try {
                         outputStream.close();
                     } catch (IOException e) {
-                        alertHandler.showAlert("Error while closing outputStream",
-                                                  "Error");
+                        Platform.runLater(() -> {
+                            run.killProcess();
+                            alertHandler.showAlert("Error while closing outputStream",
+                                    "Error");
+                        });
                     }
                     break;
                 }else {
                     try {
                         run.join(1);
                     } catch (InterruptedException e) {
-                        alertHandler.showAlert("Run interrupted", "Interrupted");
+                        Platform.runLater(() -> {
+                            run.killProcess();
+                            alertHandler.showAlert("Run interrupted", "Interrupted");
+                        });
                         break;
                     }
                 }

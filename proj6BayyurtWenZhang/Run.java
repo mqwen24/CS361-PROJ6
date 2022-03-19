@@ -17,12 +17,14 @@ public class Run extends Thread{
     private AlertHandler alertHandler;
     private StyleClassedTextArea console;
     private String errorMessage;
+    private boolean killProcess;
 
     public Run(File fileToCompile, StyleClassedTextArea console) {
         this.fileToCompile = fileToCompile;
         this.alertHandler = new AlertHandler();
         this.console = console;
         this.errorMessage = null;
+        this.killProcess = false;
     }
 
     /**
@@ -46,6 +48,10 @@ public class Run extends Thread{
 
             while(p.isAlive()) {
 
+                if (killProcess == true){
+                    break;
+                }
+
                 while (processInputStream.available() != 0 &&  (byteValueFromRead = processInputStream.read()) != -1) {
                     terminalOutput += (char) byteValueFromRead;
                     if (byteValueFromRead == 10)
@@ -65,6 +71,7 @@ public class Run extends Thread{
                 }
             }
 
+            killProcess = false;
             p.waitFor();
 
             if (p.exitValue() != 0) {
@@ -111,6 +118,13 @@ public class Run extends Thread{
      * */
     public String getErrorMessage() {
         return errorMessage;
+    }
+
+    /**
+     * Kills the running process
+     */
+    public void killProcess(){
+        killProcess = true;
     }
 
 }
