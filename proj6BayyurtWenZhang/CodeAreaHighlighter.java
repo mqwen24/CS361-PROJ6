@@ -48,7 +48,7 @@ public class CodeAreaHighlighter {
     private static final String SEMICOLON_PATTERN = "\\;";
     private static final String STRING_PATTERN = "\"([^\"\\\\]|\\\\.)*\"";
     private static final String COMMENT_PATTERN = "//[^\n]*" + "|" + "/\\*(.|\\R)*?\\*/";
-    private static final String FINAL_INT_PATTERN = "(?<=\\s|^)[-+]?\\d+(?=\\s|$)";
+    private static final String FINAL_INT_PATTERN = "(?<=\\s|^|;)[-+]?\\d+(?=\\s|$|;)";
 
     private static final Pattern PATTERN = Pattern.compile(
             "(?<FINALINT>" + FINAL_INT_PATTERN + ")" + "|(?<KEYWORD>" + KEYWORD_PATTERN + ")"

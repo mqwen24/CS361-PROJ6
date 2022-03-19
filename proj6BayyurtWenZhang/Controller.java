@@ -203,6 +203,8 @@ public class Controller {
             close.setDisable(false);
             save.setDisable(false);
             saveAs.setDisable(false);
+            compile.setDisable(false);
+            compileAndRun.setDisable(false);
             for (MenuItem item : edit.getItems())
             {
                 item.setDisable(false);

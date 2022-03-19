@@ -107,14 +107,9 @@ public class DialogHelper {
      * @return which type of Button was clicked within the dialog.
      */
     public Optional<ButtonType> closeDialog(){
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setHeaderText(String.format("Do you want to save " + "your progress on %s " +
-                "before closing?", tabHelper.getCurrentTab().getText()));
-        ButtonType yes = new ButtonType("Yes");
-        ButtonType no = new ButtonType("No");
-        ButtonType cancel = new ButtonType("Cancel",
-                ButtonBar.ButtonData.CANCEL_CLOSE);
-        alert.getButtonTypes().setAll(yes, no, cancel);
+        Alert alert = createConfirmationAlert( String.format(
+                        "Do you want to save " + "your progress on %s " +
+                        "before closing?", tabHelper.getCurrentTab().getText()));
         return alert.showAndWait();
     }
 
@@ -124,12 +119,25 @@ public class DialogHelper {
      * @return which type of Button was clicked within the dialog.
      */
     public Optional<ButtonType> saveDialog() {
+        Alert alert = createConfirmationAlert(
+           "Do you want to save your changes before compiling?");
+        return alert.showAndWait();
+    }
+
+    /**
+     * Constructs a confirmation alert box with custom header string
+     *
+     * @param headerText - the header text to be displayed for the alert
+     * @return Alert - the alert object created
+     */
+    private Alert createConfirmationAlert(String headerText){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setHeaderText("Do you want to save your changes before compiling?");
+        alert.setHeaderText(headerText);
         ButtonType yes = new ButtonType("Yes");
         ButtonType no = new ButtonType("No");
         ButtonType cancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
         alert.getButtonTypes().setAll(yes, no, cancel);
-        return alert.showAndWait();
+        return alert;
     }
+
 }
